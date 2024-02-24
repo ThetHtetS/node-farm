@@ -1,4 +1,7 @@
 const fs = require('fs')
+const http = require('http')
+//////////////////////////////
+// FILES
 
 //BLOCKING SYNCRONOUS WAY
 
@@ -13,13 +16,25 @@ const fs = require('fs')
 
 //NON-BLOCKING ASYNCRONOUS WAY
 
-fs.readFile('./txt/start.txt', 'utf-8', (err,data)=>{
-    if (err) return console.log(err);
-    fs.readFile(`./txt/${data}.txt`, 'utf-8', (err,data1)=>{
-        fs.readFile('./txt/append.txt', 'utf-8', (err,data2) => {
-            fs.writeFile('./txt/final.txt', `${data1}\n ${data2}`, 'utf-8', (err)=>{
-                console.log('file written!');
-            })
-        })
-    })
+// fs.readFile('./txt/start.txt', 'utf-8', (err,data)=>{
+//     if (err) return console.log(err);
+//     fs.readFile(`./txt/${data}.txt`, 'utf-8', (err,data1)=>{
+//         fs.readFile('./txt/append.txt', 'utf-8', (err,data2) => {
+//             fs.writeFile('./txt/final.txt', `${data1}\n ${data2}`, 'utf-8', (err)=>{
+//                 console.log('file written!');
+//             })
+//         })
+//     })
+// })
+
+
+//////////////////////////////
+// SERVER
+
+const server = http.createServer((req, res)=>{
+    res.end('hello from node farm server')
+})
+
+server.listen(8000, '127.0.0.1', ()=>{
+    console.log('listening to port 8000');
 })
